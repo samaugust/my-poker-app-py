@@ -448,3 +448,25 @@ def winning_hand(hand):
   if pair(hand):
     return "PAIR!" 
   return "COMPLETE AIR"
+
+def visual(cards):
+  
+  card_hash = { "2": " 2", "3": " 3", "4": " 4", "5": " 5", "6": " 6", "7": " 7", "8": " 8", "9": " 9", "10": "10", "11": "J ", "12": "Q ", "13": "K ", "14": "A " }
+  suits = [ "♦", "♥", "♣", "♠" ]
+
+  to_put = ""
+  for i in range(0, 4):
+    for j in range(0, len(cards)):
+      if i == 0:
+        to_put += " ______"
+      elif i == 1:
+        to_put += "|" + suits[ deck().index(cards[j]) % 4 ] + "    |"
+      elif i == 2:
+        if len(cards[j]) == 2: 
+          to_put += "| " + card_hash[cards[j][0]] + "  |"
+        elif len(cards[j]) == 3:
+          to_put += "|  " + card_hash[cards[j][0:2]]+ " |"
+      elif i == 3:
+        to_put += "|____" + suits[ deck().index(cards[j]) % 4 ] + "|"
+    to_put += "\n"
+  return to_put
